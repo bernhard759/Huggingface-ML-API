@@ -1,9 +1,10 @@
-FROM python:3.8-slim
+FROM python:3.9-slim
 
 WORKDIR /app
 
 RUN apt-get -y update  && apt-get install -y \
-  poppler-utils
+  poppler-utils \
+  python3-opencv
 
 RUN pip install --upgrade setuptools 
 
@@ -13,8 +14,8 @@ RUN pip install torch torchvision torchaudio --extra-index-url https://download.
 
 ADD . .
 
-EXPOSE 8000:8000
+EXPOSE 8000
 
 RUN python download.py
 
-CMD uvicorn app:app --host 0.0.0.0 --port 8000
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

@@ -1,0 +1,5 @@
+ports:
+    - name: ML Api
+      description: The ML Api
+      port: 8000
+      onOpen: open-browser
